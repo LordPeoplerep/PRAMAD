@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRAMAD MkI Power Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 2em auto; background: #f8f8f8; padding: 2em; border-radius: 10px; }
+    h1, h2 { text-align: center; }
+    label, input { display: block; margin-bottom: 1em; width: 100%; max-width: 400px; }
+    input { padding: 0.5em; }
+    button { padding: 0.6em 1.2em; font-size: 1em; cursor: pointer; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1.5em; }
+    th, td { border: 1px solid #bbb; padding: 0.6em; text-align: right; }
+    th { background: #ddd; text-align: left; }
+    footer { margin-top: 2em; text-align: center; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>PRAMAD MkI</h1>
+  <h2>Antimatter Power Output Calculator</h2>
+
+  <label for="antimass"><strong>1. Antimatter Mass (kg):</strong></label>
+  <input type="number" id="antimass" min="0" step="any" value="1">
+
+  <label for="generatorPower"><strong>2. Generator Conversion Rate (TW per kg):</strong></label>
+  <input type="number" id="generatorPower" min="0" step="any" value="10">
+
+  <button onclick="calculatePower()">⚡ Calculate Power Output</button>
+
+  <div id="result"></div>
+
+  <footer>
+    Developed for Delta-Nu | Powered by Moscow Corps
+  </footer>
+
+  <script>
+    function calculatePower() {
+      const mass = parseFloat(document.getElementById('antimass').value);
+      const rate = parseFloat(document.getElementById('generatorPower').value);
+      if (isNaN(mass) || isNaN(rate) || mass < 0 || rate < 0) {
+        alert('Please enter valid non-negative numbers.');
+        return;
+      }
+      const output = mass * rate;
+      document.getElementById('result').innerHTML = `
+        <table>
+          <tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Antimatter Mass</td><td>${mass} kg</td></tr>
+          <tr><td>Conversion Rate</td><td>${rate} TW/kg</td></tr>
+          <tr><td>Power Output</td><td>${output.toFixed(2)} TW</td></tr>
+        </table>`;
+    }
+  </script>
+</body>
+</html>
